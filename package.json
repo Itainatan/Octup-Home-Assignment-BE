@@ -1,0 +1,41 @@
+{
+  "name": "easyway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.ts | pino-pretty -i hostname,pid -t",
+    "build": "rm -rf dist && tsc",
+    "start": "node dist/src/index.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data.json"
+    ]
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "coinbase": "^2.0.8",
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "joi": "^17.5.0",
+    "moment": "^2.29.1",
+    "node-cron": "^3.0.0",
+    "pino": "^7.6.4"
+  },
+  "devDependencies": {
+    "@types/coinbase": "^2.0.8",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.13",
+    "@types/node-cron": "^3.0.1",
+    "dotenv": "^14.3.2",
+    "nodemon": "^2.0.15",
+    "pino-pretty": "^7.5.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.5"
+  }
+}
