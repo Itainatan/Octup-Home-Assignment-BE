@@ -1,16 +1,12 @@
-import dotenv from 'dotenv'
-import path from 'path'
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
 const {
-  PORT = '8000',
+  PORT = "8000",
+  API_URL = "https://www.superheroapi.com/api",
+  SECRET_TOKEN = "10223009321394258",
+} = process.env;
 
-} = process.env
 
-const DATA_PATH_JSON = path.join(__dirname, '../data.json')
-
-export {
-  PORT,
-  DATA_PATH_JSON,
-}
+export { PORT, API_URL, SECRET_TOKEN };

@@ -1,18 +1,17 @@
 import { RequestHandler } from "express";
 import Joi from "joi";
-import fs from "fs";
 import { logger } from "../utils";
-import { DATA_PATH_JSON } from "../consts";
+import { API_URL, SECRET_TOKEN } from "../consts";
 import axios from "axios";
 
 const schema = Joi.object().keys({
-  city: Joi.string(),
+  name: Joi.string(),
 });
 
 const deleteExchange: RequestHandler = async (req, res) => {
   try {
     const {
-      params: { city },
+      params: { name },
       params,
     } = req;
 
@@ -24,26 +23,15 @@ const deleteExchange: RequestHandler = async (req, res) => {
       });
     }
 
-    logger.info(`got city -> `, city);
+    logger.info(`got name -> ${name}`);
 
-    const weather = await axios.get(
-      `https://api.weatherapi.com/v1/current.json?q=${city}&key=0c2ec368bdf34942bd0104420233005`
+    const { data } = await axios.get(
+      `${API_URL}/${SECRET_TOKEN}/search/${name}`
     );
 
-    const dataToReturn = {
-      name: city,
-      data: weather.data,
-    };
+    logger.info(`got data for the name -> ${name}`);
 
-    logger.info("got weather for the city");
-
-    const dataFromFile = await fs.promises.readFile(DATA_PATH_JSON, 'utf-8')
-
-    await fs.promises.writeFile(DATA_PATH_JSON, JSON.stringify([...JSON.parse(dataFromFile), dataToReturn]));
-
-    logger.info("finish save in database");
-
-    return res.status(200).json(dataToReturn);
+    return res.status(200).json(data);
   } catch (e) {
     const message = e instanceof Error ? e.message : "General Error";
     const stack = e instanceof Error ? e.stack : "No Stack";

@@ -1,10 +1,8 @@
 import { Router } from "express";
-import history from "./get-history";
-import search from "./get-weather";
+import search from "./get-hero";
 
 const router = Router();
 
-router.get("/get-history", [], history);
-router.get("/get-weather/:city", [], search);
+router.get("/get-superhero/:name", [], search);
 
 export default router;

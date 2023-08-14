@@ -1,15 +1,8 @@
 import express from "express";
-import fs from "fs/promises";
 import routes from "./routes";
 import { PORT } from "./consts";
 import { logger } from "./utils";
 import cors from "cors";
-
-const createFile = async () => {
-  await fs.writeFile("data.json", JSON.stringify([]));
-};
-
-createFile();
 
 const app = express();
 
